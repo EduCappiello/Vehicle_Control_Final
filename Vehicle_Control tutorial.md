@@ -19,8 +19,6 @@ sudo apt-get install ros-noetic-teleop-twist-keyboard
 sudo apt-get install ros-noetic-gazebo-ros-control
 sudo apt install ros-noetic-xacro
 sudo apt install ros-noetic-robot-state-publisher
-
-
 ```
 
 ### Create the work space and catkin space:
@@ -31,7 +29,7 @@ mkdir -p ~/robot_four/src
 cd ~/robot_four
 catkin_make
 source ~/robot_four/devel/setup.bash
-echo $ROS PACKAGE_PATH
+echo $ROS_PACKAGE_PATH
 cd ~/robot_four/src
 ```
 
@@ -78,16 +76,12 @@ Paste the following code in the file "robot.xacro":
     <xacro:property name="pi_const" value="3.14159265"/>
 
     <!-- Robot body and wheel mass-->
-    <xacro:property name="body_mass" 
-    value="${body_density * body_link_x_dim * body_link_y_dim * body_link_z_dim}"/>
-    <xacro:property name="wheel_mass" 
-    value="${-wheel_density * pi_const * wheel_link_radius * wheel_link_radius * wheel_link_length}"/>
+    <xacro:property name="body_mass" value="${body_density*body_link_x_dim*body_link_y_dim*body_link_z_dim}"/>
+    <xacro:property name="wheel_mass" value="${wheel_density*pi_const*wheel_link_radius*wheel_link_radius*wheel_link_length}"/>
 
     <!-- Moments of inertia of the wheel-->
-    <xacro:property name="Iz_wheel" 
-    value="${0.5 * wheel_mass * wheel_link_radius * wheel_link_radius}"/>
-    <xacro:property name="I_wheel" 
-    value="${-(1.0/12.0) * wheel_mass * (3.0 * wheel_link_radius * wheel_link_radius + wheel_link_length * wheel_link_length)}"/>
+    <xacro:property name="Iz_wheel" value="${(1/2)*wheel_mass*wheel_link_radius*wheel_link_radius}"/>
+    <xacro:property name="I_wheel" value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_link_length*wheel_link_length)}"/>
 
     <!-- This macro defines the complete Inertial section of the wheel-->
     <!-- It is used later in the code -->
@@ -114,9 +108,10 @@ Paste the following code in the file "robot.xacro":
         <child link="body_link"/>
     </joint>
 
-    <!--#################################-->
-    <!--# START: Body link of the robot #-->
-    <!--#################################-->
+    <!--####################################-->
+    <!--#   START: Body link of the robot  #-->
+    <!--####################################-->
+
     <link name="body_link">
         <visual>
             <geometry>
@@ -130,12 +125,22 @@ Paste the following code in the file "robot.xacro":
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 0"/>
         </collision>
-        <inertial ixx="${(1/12)*body_mass*(body_link_y_dim*body_link_y_dim+body_link_z_dim*body_link_z_dim)}" ixy="0" ixz="0" iyy="${(1/12)*body_mass*(body_link_x_dim*body_link_x_dim+body_link_z_dim*body_link_z_dim)}" iyz="0" izz="${(1/12)*body_mass*(body_link_y_dim*body_link_y_dim+body_link_x_dim*body_link_x_dim)}" />
+        <inertial>
+            <mass value="${body_mass}"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <inertia ixx="${(1/12)*body_mass*(body_link_y_dim*body_link_y_dim+body_link_z_dim*body_link_z_dim)}" 
+                     ixy="0" 
+                     ixz="0" 
+                     iyy="${(1/12)*body_mass*(body_link_x_dim*body_link_x_dim+body_link_z_dim*body_link_z_dim)}" 
+                     iyz="0" 
+                     izz="${(1/12)*body_mass*(body_link_y_dim*body_link_y_dim+body_link_x_dim*body_link_x_dim)}"/>
+        </inertial>
     </link>
 
-    <!-- #########################################################-->
-    <!-- #                    Body link of the robot             #-->
-    <!-- #########################################################-->
+    <!-- ###################################-->
+    <!-- #   END:Body link of the robot    #-->
+    <!-- ###################################-->
+
 
     <!-- ###########################################################-->
     <!-- #   START: Back right wheel of the robot and the joint    #-->
@@ -272,6 +277,7 @@ Paste the following code in the file "robot.xacro":
     <!-- #   END: Front left wheel of the robot and the joint      #-->
     <!-- ###########################################################-->
 </robot>
+
 ```
 Create the gazebo file:
 ```bash
