@@ -16,11 +16,17 @@ sudo apt-get install ros-noetic-gazebo-ros-pkgs
 sudo apt-get install ros-noetic-gazebo-msgs
 sudo apt-get install ros-noetic-gazebo-plugins
 sudo apt-get install ros-noetic-teleop-twist-keyboard
+sudo apt-get install ros-noetic-gazebo-ros-control
+sudo apt install ros-noetic-xacro
+sudo apt install ros-noetic-robot-state-publisher
+
+
 ```
 
 ### Create the work space and catkin space:
 
 ```bash
+export ROS_DISTRO=noetic
 mkdir -p ~/robot_four/src
 cd ~/robot_four
 catkin_make
