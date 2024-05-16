@@ -8,8 +8,13 @@ Gazebo 11.14.0
 ```
 ## Setup
 
-### First install the necesary packages.
-
+### First, detete this two lines from the ~/.bashrc and install the necesary packages.
+```bash
+sed -i '/source \/opt\/ros\/foxy\/setup.bash/d' ~/.bashrc
+```
+```bash
+sed -i '/source install\/setup.bash/d' ~/.bashrc
+```
 Let's install the needed packages:
 ```bash
 sudo apt-get -y install ros-noetic-gazebo-ros-pkgs
