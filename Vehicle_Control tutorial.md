@@ -2,9 +2,9 @@
 This tutorial shows the use of gazebo and ROS for mobile robot simulation
 ```
 System software versions:
-Ubuntu version 22.04
-ROS2 Humble
-Gazebo Fortress
+Ubuntu version 20.04
+ROS1 noetic
+Gazebo 11.14.0
 ```
 ## Setup
 
