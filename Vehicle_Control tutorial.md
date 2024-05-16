@@ -12,10 +12,10 @@ Gazebo Fortress
 
 Let's install the needed packages:
 ```bash
-sudo apt-get install ros-humble-gazebo-ros-pkgs
-sudo apt-get install ros-humble-gazebo-msgs
-sudo apt-get install ros-humble-gazebo-plugins
-sudo apt-get install ros-humble-teleop-twist-keyboard
+sudo apt-get install ros-noetic-gazebo-ros-pkgs
+sudo apt-get install ros-noetic-gazebo-msgs
+sudo apt-get install ros-noetic-gazebo-plugins
+sudo apt-get install ros-noetic-teleop-twist-keyboard
 ```
 
 ### Create the work space and catkin space:
