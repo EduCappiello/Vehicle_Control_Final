@@ -413,7 +413,7 @@ roslaunch robot_model_pkg robot_xacro.launch
 
 Create a teleop node for controlling the robot. Open a new terminal and type
 ```bash
-rrosrun teleop_twist_keyboard teleop_twist_keyboard.py
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
 
 Then, investigate the topics that are being used and published to. Open a new terminal and type:
