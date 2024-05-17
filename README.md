@@ -105,8 +105,8 @@ Open a new terminal and start:
 roscore
 ```
 Finally we can launch our model in gazebo as:
-
 ```bash
+source ~/robot_four/devel/setup.bash
 roslaunch robot_model_pkg robot_xacro.launch
 ```
 
